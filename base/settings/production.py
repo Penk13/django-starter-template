@@ -10,8 +10,23 @@ DEBUG = False
 ALLOWED_HOSTS = ['django-starter-template.herokuapp.com']
 
 
+INSTALLED_APPS += [
+    'cloudinary',
+    'cloudinary_storage',
+]
+
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+
+# Cloudinary config
+CLOUDINARY_STORAGE = {
+'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+'API_KEY': os.environ.get('CLOUD_API_KEY'),
+'API_SECRET': os.environ.get('CLOUD_API_SECRET')
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Security
